@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+         <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+          <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chart.css') }}">
+          <style>
+              .ct-chartForlikes_
+            {
+                 position:absolute;
+                top:200px;
+                left:100px;
+            }
+
+            .ct-chartForLikes
+            {
+                 position:absolute;
+                top:1000px;
+                right:100px;
+            }
+
+            .ct-chartForSentiment
+            {
+                position:absolute;
+                top:200px;
+                left:1000px;
+
+            }
+
+            .ct-chartForRetweets
+            {
+                position:absolute;
+                top:1000px;
+                left:100px;
+            }
+
+            #button1
+            {
+                width:200px;
+                height:100px;
+                font-size:30px;
+            }
+          </style>
+  </head>
+    <body>
+        <!--<div id="rt">
+             {% for item in listlikes_ :%}
+                                        {{item}}
+              {% endfor %}
+        </div>-->
+
+         <form action="/" method="get">
+            <center>
+                <button name="forwardBtn" id="button1" type="submit">collect the recent tweets</button>
+            </center>
+         </form>
+
+        <h1>Statistical data about the tweets</h1>
+
+            <div class="ct-chartForlikes_"><h2>Likes</h2></div>
+            <div class="ct-chartForSentiment"><h2> Sentiment Statistics</h2></div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="ct-chartForRetweets"><h2> Retweets Statistics</h2></div>
+            <div class="ct-chartForLikes"><h2>Likes and  Retweets Statistics</h2></div>
+
+
+        <!--for plotting Sentimental analysis of tweets-->
+        <script>
+                     var myChart;
+                     var data;
+                     var counts={{sentimentList|tojson}};
+                     data = {
+                          // A labels array that can contain any sort of values
+                          labels: ['Positive tweets', 'negative tweets', 'neutral tweets'],
+                          // Our series array that contains series objects or in this case series data arrays
+                          series:[[]]
+                        };
+                          data.series[0]= counts;
+
+                        var options=
+                        {
+                            width:600,
+                            height:600,
+                            lineSmooth:false
+                        }
+
+                        // Create a new line chart object where as first parameter we pass in a selector
+                        // that is resolving to our chart container element. The Second parameter
+                        // is the actual data object.
+                        myChart = new Chartist.Line('.ct-chartForSentiment', data, options);
+
+        </script>
+
+        <!--for plotting frequency the Likes of tweets in the form of histogram-->
+        <script>
+                        var counts={{listlikes_|tojson}};
+                        var data =
+                         {
+                              labels:['less than 500','between 500 and 1000','greater than 1000'],
+                              series: counts
+                          };
+
+                new Chartist.Pie('.ct-chartForlikes_', data,options);
+        </script>
+
+        <!--for plotting Frequncy of retweets of tweets-->
+         <script>
+                        var counts={{listRetweets|tojson}};
+                        var data =
+                         {
+                              labels:['less than 500','between 500 and 1000','greater than 1000'],
+                              series: counts
+                          };
+
+
+                new Chartist.Pie('.ct-chartForRetweets', data,options)
+        </script>
+
+         <!--for plotting frequency the Likes of tweets in the form of histogram-->
+        <script>
+
+                      var data;
+
+                     var counts={{listlikes_|tojson}};
+                      var countsR={{listRetweets|tojson}};
+                     data = {
+                          // A labels array that can contain any sort of values
+                          labels: ['1st','2nd','3rd '],
+                          // Our series array that contains series objects or in this case series data arrays
+                          series:[[]]
+                        };
+                          data.series[0]= counts;
+                          data.series[1]=countsR
+
+                        var options=
+                        {
+                            width:600,
+                            height:600
+                        }
+
+                        // Create a new line chart object where as first parameter we pass in a selector
+                        // that is resolving to our chart container element. The Second parameter
+                        // is the actual data object.
+                        var myChart = new Chartist.Bar('.ct-chartForLikes', data, options);
+
+        </script>
+    </body>
+</html>
