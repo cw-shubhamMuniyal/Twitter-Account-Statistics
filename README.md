@@ -29,4 +29,4 @@ Our project is built to perform statistical analysis on tweet and its metadata. 
 3. Access the website on localhost
 
 ## DEMO
-To watch complete the video on youtube click [Here](https://www.youtube.com/watch?v=BIyNyXvFWGs "Here")
+To watch complete video on youtube click [Here](https://www.youtube.com/watch?v=BIyNyXvFWGs "Here")
