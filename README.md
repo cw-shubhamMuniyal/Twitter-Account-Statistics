@@ -1,5 +1,5 @@
 # Twitter Statistics
-Our project is built to perform statistical analysis on tweet and its metadata. Metadata includes information like number of likes, number of retweets, hashtags, comments, etc
+Our project is built to perform statistical analysis on tweet and its metadata. Metadata includes information like likes, retweets, hashtags, comments, etc
 
 
 ## Key Features
